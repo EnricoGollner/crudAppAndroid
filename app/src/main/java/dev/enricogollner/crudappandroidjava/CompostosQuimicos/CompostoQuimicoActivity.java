@@ -1,8 +1,9 @@
-package dev.enricogollner.crudappandroidjava.ComponentesQuimicos;
+package dev.enricogollner.crudappandroidjava.CompostosQuimicos;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,7 +18,6 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
-import dev.enricogollner.crudappandroidjava.MainActivity;
 import dev.enricogollner.crudappandroidjava.R;
 import dev.enricogollner.crudappandroidjava.models.CompostoQuimico;
 
@@ -30,11 +30,11 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compostos_quimicos);
 
-        atualizaLista();
+        atualizarLista();
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
             compostoSelecionado = null;
-            startActivity(new Intent(this, CadastroComponentes.class));
+            startActivity(new Intent(this, CadastroComponentesActivity.class));
         });
     }
 
@@ -42,27 +42,35 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        atualizaLista();
+        atualizarLista();
     }
 
 
-    private void atualizaLista() {
-        ArrayAdapter<CompostoQuimico> adf = new ArrayAdapter<CompostoQuimico>(this, android.R.layout.simple_list_item_1, listaCompostos) {
+    private void atualizarLista() {
+        ArrayAdapter<CompostoQuimico> arrayCompostos = new ArrayAdapter<CompostoQuimico>(this, android.R.layout.simple_list_item_1, listaCompostos) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                textView.setTextColor(Color.BLUE);
-                textView.setTextSize(30);
+                textView.setTextSize(27);
                 return view;
             }
         };
-        ListView lf = (ListView) findViewById(R.id.lvComponentes);
-        lf.setAdapter(adf);
-        lf.setOnItemClickListener((adapterView, view, i, l) -> {
+        ListView listaCompostos = (ListView) findViewById(R.id.lvComponentes);
+        listaCompostos.setAdapter(arrayCompostos);
+
+        listaCompostos.setOnItemClickListener((adapterView, view, i, l) -> {
             compostoSelecionado = i;
-            startActivity(new Intent(this, MainActivity.class));  // TO-DO - alterar para ir para a tela de cadastro de componentes
+            startActivity(new Intent(this, CadastroComponentesActivity.class));
         });
+
+        listaCompostos.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            arrayCompostos.remove(arrayCompostos.getItem(i));
+            atualizarLista();
+
+            return true;
+        });
+
     }
 }

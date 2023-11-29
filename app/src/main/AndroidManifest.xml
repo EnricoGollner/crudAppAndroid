@@ -19,13 +19,13 @@
             android:name=".RegistroSaida.CadastroRegistroSaidaActivity"
             android:exported="false" />
         <activity
-            android:name=".ComponentesQuimicos.CadastroComponentes"
+            android:name=".CompostosQuimicos.CadastroComponentesActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroSaida.RegistroSaidaActivity"
             android:exported="false" />
         <activity
-            android:name=".ComponentesQuimicos.CompostoQuimicoActivity"
+            android:name=".CompostosQuimicos.CompostoQuimicoActivity"
             android:exported="false" />
         <activity
             android:name=".CompostosQuimicosActitvity"

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import dev.enricogollner.crudappandroidjava.ComponentesQuimicos.CompostoQuimicoActivity;
 import dev.enricogollner.crudappandroidjava.R;
 
 public class RegistrosSaidaActivity extends AppCompatActivity {

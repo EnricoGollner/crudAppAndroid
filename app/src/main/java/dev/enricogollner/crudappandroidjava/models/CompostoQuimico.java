@@ -5,4 +5,10 @@ public class CompostoQuimico {
     public String nome;
     public String formula;
     public String unidadeMedida;
+
+    @Override
+    public String toString() {
+        return this.nome + " | Fórmula: " + this.formula;
+    }
+
 }
