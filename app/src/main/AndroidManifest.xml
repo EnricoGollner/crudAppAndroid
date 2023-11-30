@@ -19,7 +19,7 @@
             android:name=".RegistroSaida.CadastroRegistroSaidaActivity"
             android:exported="false" />
         <activity
-            android:name=".CompostosQuimicos.CadastroComponentesActivity"
+            android:name=".CompostosQuimicos.CadastroCompostosActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroSaida.RegistroSaidaActivity"

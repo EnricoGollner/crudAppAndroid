@@ -3,10 +3,8 @@ package dev.enricogollner.crudappandroidjava.CompostosQuimicos;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +16,14 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
+import dev.enricogollner.crudappandroidjava.Helper.CompostoDAO;
 import dev.enricogollner.crudappandroidjava.R;
 import dev.enricogollner.crudappandroidjava.models.CompostoQuimico;
 
 public class CompostoQuimicoActivity extends AppCompatActivity {
     public static List<CompostoQuimico> listaCompostos = new LinkedList();
+
+    private CompostoDAO compostoDAO;
     public static Integer compostoSelecionado = null;
 
     @Override
@@ -30,14 +31,15 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compostos_quimicos);
 
+        compostoDAO = new CompostoDAO(this);
+
         atualizarLista();
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
             compostoSelecionado = null;
-            startActivity(new Intent(this, CadastroComponentesActivity.class));
+            startActivity(new Intent(this, CadastroCompostosActivity.class));
         });
     }
-
 
     @Override
     protected void onResume() {
@@ -47,6 +49,8 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
 
 
     private void atualizarLista() {
+        listaCompostos = compostoDAO.getAllCompostos();
+
         ArrayAdapter<CompostoQuimico> arrayCompostos = new ArrayAdapter<CompostoQuimico>(this, android.R.layout.simple_list_item_1, listaCompostos) {
             @NonNull
             @Override
@@ -57,20 +61,25 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
                 return view;
             }
         };
-        ListView listaCompostos = (ListView) findViewById(R.id.lvComponentes);
-        listaCompostos.setAdapter(arrayCompostos);
 
-        listaCompostos.setOnItemClickListener((adapterView, view, i, l) -> {
+        ListView listViewCompostos = (ListView) findViewById(R.id.lvComponentes);
+        listViewCompostos.setAdapter(arrayCompostos);
+
+        listViewCompostos.setOnItemClickListener((adapterView, view, i, l) -> {
             compostoSelecionado = i;
-            startActivity(new Intent(this, CadastroComponentesActivity.class));
+            startActivity(new Intent(this, CadastroCompostosActivity.class));
         });
 
-        listaCompostos.setOnItemLongClickListener((adapterView, view, i, l) -> {
-            arrayCompostos.remove(arrayCompostos.getItem(i));
+        listViewCompostos.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            CompostoQuimico composto =  arrayCompostos.getItem(i);
+            compostoDAO.deleteComposto(composto.idComposto);
             atualizarLista();
-
             return true;
         });
 
     }
+
+
+
+
 }

@@ -8,15 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import dev.enricogollner.crudappandroidjava.Helper.CompostoDAO;
 import dev.enricogollner.crudappandroidjava.R;
 import dev.enricogollner.crudappandroidjava.models.CompostoQuimico;
 
-public class CadastroComponentesActivity extends AppCompatActivity {
+public class CadastroCompostosActivity extends AppCompatActivity {
+    private CompostoDAO compostoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_componentes);
+
+        compostoDAO = new CompostoDAO(this);
 
         Spinner spinnerUnidadeMedida = findViewById(R.id.selectUnidadeMedida);
 
@@ -45,9 +49,10 @@ public class CadastroComponentesActivity extends AppCompatActivity {
             composto.unidadeMedida = ((Spinner) findViewById(R.id.selectUnidadeMedida)).getSelectedItem().toString();
 
             if (CompostoQuimicoActivity.compostoSelecionado == null) {
-                CompostoQuimicoActivity.listaCompostos.add(composto);
+                composto.idComposto = compostoDAO.addComposto(composto.nome, composto.formula, composto.unidadeMedida);
             } else {
-                CompostoQuimicoActivity.listaCompostos.set(CompostoQuimicoActivity.compostoSelecionado, composto);
+                compostoDAO.updateComposto(Long.valueOf(CompostoQuimicoActivity.compostoSelecionado), composto);
+//                CompostoQuimicoActivity.listaCompostos.set(CompostoQuimicoActivity.compostoSelecionado, composto);
                 CompostoQuimicoActivity.compostoSelecionado = null;
             }
 

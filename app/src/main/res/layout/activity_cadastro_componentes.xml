@@ -57,7 +57,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dip"
+            android:layout_width="2dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="Unidade de medida:"
@@ -65,7 +65,7 @@
 
         <Spinner
             android:id="@+id/selectUnidadeMedida"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:entries="@array/unidades_medida"
             android:padding="15dp"/>

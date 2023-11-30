@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    //Nitrite-db
+//    implementation("org.dizitart:nitrite-android:3.4.3")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
