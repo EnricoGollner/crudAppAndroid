@@ -24,7 +24,9 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
     public static List<CompostoQuimico> listaCompostos = new LinkedList();
 
     private CompostoDAO compostoDAO;
-    public static Integer compostoSelecionado = null;
+
+    public  static Integer posComposto = null;
+    public static Long idCompostoSelecionado = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
         atualizarLista();
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
-            compostoSelecionado = null;
+            idCompostoSelecionado = null;
             startActivity(new Intent(this, CadastroCompostosActivity.class));
         });
     }
@@ -57,7 +59,7 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                textView.setTextSize(27);
+                textView.setTextSize(24);
                 return view;
             }
         };
@@ -65,11 +67,14 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
         ListView listViewCompostos = (ListView) findViewById(R.id.lvComponentes);
         listViewCompostos.setAdapter(arrayCompostos);
 
+        // Navegando para editar composto ao clicar uma vez
         listViewCompostos.setOnItemClickListener((adapterView, view, i, l) -> {
-            compostoSelecionado = i;
+            posComposto = i;
+            idCompostoSelecionado = listaCompostos.get(i).idComposto;
             startActivity(new Intent(this, CadastroCompostosActivity.class));
         });
 
+        // Deletar composto ao pressionar por um tempo maior
         listViewCompostos.setOnItemLongClickListener((adapterView, view, i, l) -> {
             CompostoQuimico composto =  arrayCompostos.getItem(i);
             compostoDAO.deleteComposto(composto.idComposto);

@@ -31,6 +31,7 @@ public class CompostoDAO {
         values.put(Database.COLUMN_NOME_COMPOSTO, nome);
         values.put(COLUMN_FORMULA, formula);
         values.put(Database.COLUMN_UNIDADE_MEDIDA, unidadeMedida);
+
         return db.insert(Database.TABLE_NAME_1, null, values);
     }
 
@@ -64,17 +65,18 @@ public class CompostoDAO {
 
     public int updateComposto(long compostoId, CompostoQuimico compostoQuimico) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(Database.COLUMN_ID_1, compostoId);
         values.put(Database.COLUMN_NOME_COMPOSTO, compostoQuimico.nome);
         values.put(COLUMN_FORMULA, compostoQuimico.formula);
+
         return db.update(Database.TABLE_NAME_1, values,
                 Database.COLUMN_ID_1 + " = ?",
                 new String[]{String.valueOf(compostoId)});
     }
 
 
-    // Método para excluir um composto
     public int deleteComposto(long compostoId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         return db.delete(Database.TABLE_NAME_1,

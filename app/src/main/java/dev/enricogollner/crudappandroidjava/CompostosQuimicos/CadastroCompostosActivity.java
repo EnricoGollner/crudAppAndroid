@@ -15,12 +15,16 @@ import dev.enricogollner.crudappandroidjava.models.CompostoQuimico;
 public class CadastroCompostosActivity extends AppCompatActivity {
     private CompostoDAO compostoDAO;
 
+    private EditText formulaEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_componentes);
 
+
         compostoDAO = new CompostoDAO(this);
+        formulaEditText = findViewById(R.id.edtFormula);
 
         Spinner spinnerUnidadeMedida = findViewById(R.id.selectUnidadeMedida);
 
@@ -33,10 +37,10 @@ public class CadastroCompostosActivity extends AppCompatActivity {
         spinnerUnidadeMedida.setAdapter(adapter);
 
 
-        if (CompostoQuimicoActivity.compostoSelecionado != null) {
-            CompostoQuimico composto = CompostoQuimicoActivity.listaCompostos.get(CompostoQuimicoActivity.compostoSelecionado);
+        if (CompostoQuimicoActivity.posComposto != null) {
+            CompostoQuimico composto = CompostoQuimicoActivity.listaCompostos.get(CompostoQuimicoActivity.posComposto);
             ((EditText) findViewById(R.id.edtNome)).setText(composto.nome);
-            ((EditText) findViewById(R.id.edtFormula)).setText(composto.formula);
+            formulaEditText.setText(composto.formula);
 
             int posicaoUnidade = adapter.getPosition(composto.unidadeMedida);
             spinnerUnidadeMedida.setSelection(posicaoUnidade);
@@ -48,12 +52,11 @@ public class CadastroCompostosActivity extends AppCompatActivity {
             composto.formula = ((EditText) findViewById(R.id.edtFormula)).getText().toString();
             composto.unidadeMedida = ((Spinner) findViewById(R.id.selectUnidadeMedida)).getSelectedItem().toString();
 
-            if (CompostoQuimicoActivity.compostoSelecionado == null) {
-                composto.idComposto = compostoDAO.addComposto(composto.nome, composto.formula, composto.unidadeMedida);
+            if (CompostoQuimicoActivity.idCompostoSelecionado == null) {
+                compostoDAO.addComposto(composto.nome, composto.formula, composto.unidadeMedida);
             } else {
-                compostoDAO.updateComposto(Long.valueOf(CompostoQuimicoActivity.compostoSelecionado), composto);
-//                CompostoQuimicoActivity.listaCompostos.set(CompostoQuimicoActivity.compostoSelecionado, composto);
-                CompostoQuimicoActivity.compostoSelecionado = null;
+                compostoDAO.updateComposto(Long.valueOf(CompostoQuimicoActivity.idCompostoSelecionado), composto);
+                CompostoQuimicoActivity.idCompostoSelecionado = null;
             }
 
             finish();
