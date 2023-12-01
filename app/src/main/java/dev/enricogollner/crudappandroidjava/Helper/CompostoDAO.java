@@ -63,6 +63,9 @@ public class CompostoDAO {
         return compostos;
     }
 
+
+
+
     public int updateComposto(long compostoId, CompostoQuimico compostoQuimico) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

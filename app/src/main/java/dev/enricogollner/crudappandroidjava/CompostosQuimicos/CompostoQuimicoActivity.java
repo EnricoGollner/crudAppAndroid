@@ -83,8 +83,4 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
 }
