@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="unidades_medida">
-        <item>Gramas (g)</item>
-        <item>Mililitros (ml)</item>
+        <item>g</item>
+        <item>ml</item>
     </string-array>
 </resources>

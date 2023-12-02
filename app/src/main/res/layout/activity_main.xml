@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registro de Componentes Químicos"
+        android:text="Registro de Compostos Químicos"
         android:textAlignment="center"
         android:textSize="30dp" android:layout_marginBottom="15dp" />
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue"
-        android:text="Componentes Químicos"
+        android:text="Compostos Químicos"
         android:onClick="openChemicalComponentsActivity"
         android:layout_marginBottom="10dp"/>
 

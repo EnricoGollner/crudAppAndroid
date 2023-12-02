@@ -39,12 +39,12 @@ public class RegistrosSaidaActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
             idRegistroSelecionado = null;
+            posRegistro = null;
             startActivity(new Intent(this, CadastroRegistroSaidaActivity.class));
         });
 
         registrosSaidaDAO = new RegistrosSaidaDAO(this);
-
-//        atualizarLista();
+        atualizarLista();
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
             startActivity(new Intent(this, CadastroRegistroSaidaActivity.class));
@@ -54,7 +54,7 @@ public class RegistrosSaidaActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        atualizarLista();
+        atualizarLista();
     }
 
 
@@ -72,14 +72,14 @@ public class RegistrosSaidaActivity extends AppCompatActivity {
             }
         };
 
-        ListView listViewCompostos = (ListView) findViewById(R.id.lvComponentes);
+        ListView listViewCompostos = (ListView) findViewById(R.id.lvRegistrosSaida);
         listViewCompostos.setAdapter(arrayRegistros);
 
         // Navegando para editar composto ao clicar uma vez
         listViewCompostos.setOnItemClickListener((adapterView, view, i, l) -> {
             posRegistro = i;
             idRegistroSelecionado = listaRegistros.get(i).getIdRegistro();
-            startActivity(new Intent(this, CadastroCompostosActivity.class));
+            startActivity(new Intent(this, CadastroRegistroSaidaActivity.class));
         });
 
         // Deletar composto ao pressionar por um tempo maior

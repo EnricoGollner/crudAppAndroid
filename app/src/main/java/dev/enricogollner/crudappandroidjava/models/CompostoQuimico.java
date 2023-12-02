@@ -18,6 +18,6 @@ public class CompostoQuimico {
 
     @Override
     public String toString() {
-        return this.nome + " | Fórmula: " + this.formula + "\nUnidade de med.:" + this.unidadeMedida;
+        return this.nome + " | Fórmula: " + this.formula.toUpperCase() + "\n| Unidade de med.:" + this.unidadeMedida;
     }
 }

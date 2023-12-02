@@ -25,12 +25,12 @@ public class RegistrosSaidaDAO {
     }
 
     // Método para adicionar um registro de saída
-    public long addRegistroSaida(long compostoId, double quantidade, String observacoes) {
+    public long addRegistroSaida(RegistroSaida registroSaida) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Database.COLUMN_COMPOSTO_ID, compostoId);
-        values.put(Database.COLUMN_QUANTIDADE, quantidade);
-        values.put(Database.COLUMN_OBSERVACOES, observacoes);
+        values.put(Database.COLUMN_COMPOSTO_ID, registroSaida.getCompostoQuimico().idComposto);
+        values.put(Database.COLUMN_QUANTIDADE, registroSaida.getQuantidade());
+        values.put(Database.COLUMN_OBSERVACOES, registroSaida.getObservacoes());
         return db.insert(Database.TABLE_NAME_2, null, values);
     }
 
@@ -63,12 +63,12 @@ public class RegistrosSaidaDAO {
 
 
     // Método para atualizar um registro de saída
-    public int updateRegistroSaida(long registroId, long compostoId, double quantidade, String observacoes) {
+    public int updateRegistroSaida(long registroId, long compostoId, RegistroSaida novoRegistro) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Database.COLUMN_COMPOSTO_ID, compostoId);
-        values.put(Database.COLUMN_QUANTIDADE, quantidade);
-        values.put(Database.COLUMN_OBSERVACOES, observacoes);
+        values.put(Database.COLUMN_QUANTIDADE, novoRegistro.getQuantidade());
+        values.put(Database.COLUMN_OBSERVACOES, novoRegistro.getObservacoes());
         return db.update(Database.TABLE_NAME_2, values,
                 Database.COLUMN_ID_2 + " = ?",
                 new String[]{String.valueOf(registroId)});

@@ -22,7 +22,6 @@ public class CadastroCompostosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_componentes);
 
-
         compostoDAO = new CompostoDAO(this);
         formulaEditText = findViewById(R.id.edtFormula);
 
@@ -37,7 +36,7 @@ public class CadastroCompostosActivity extends AppCompatActivity {
         spinnerUnidadeMedida.setAdapter(adapter);
 
 
-        if (CompostoQuimicoActivity.posComposto != null) {
+        if (CompostoQuimicoActivity.posComposto != null && CompostoQuimicoActivity.idCompostoSelecionado != null) {
             CompostoQuimico composto = CompostoQuimicoActivity.listaCompostos.get(CompostoQuimicoActivity.posComposto);
             ((EditText) findViewById(R.id.edtNome)).setText(composto.nome);
             formulaEditText.setText(composto.formula);
@@ -52,11 +51,12 @@ public class CadastroCompostosActivity extends AppCompatActivity {
             composto.formula = ((EditText) findViewById(R.id.edtFormula)).getText().toString();
             composto.unidadeMedida = ((Spinner) findViewById(R.id.selectUnidadeMedida)).getSelectedItem().toString();
 
-            if (CompostoQuimicoActivity.idCompostoSelecionado == null) {
+            if (CompostoQuimicoActivity.idCompostoSelecionado == null && CompostoQuimicoActivity.posComposto == null) {
                 compostoDAO.addComposto(composto.nome, composto.formula, composto.unidadeMedida);
             } else {
                 compostoDAO.updateComposto(Long.valueOf(CompostoQuimicoActivity.idCompostoSelecionado), composto);
                 CompostoQuimicoActivity.idCompostoSelecionado = null;
+                CompostoQuimicoActivity.posComposto = null;
             }
 
             finish();

@@ -1,6 +1,7 @@
 package dev.enricogollner.crudappandroidjava.Helper;
 
 import static dev.enricogollner.crudappandroidjava.Helper.Database.COLUMN_FORMULA;
+import static dev.enricogollner.crudappandroidjava.Helper.Database.COLUMN_UNIDADE_MEDIDA;
 import static dev.enricogollner.crudappandroidjava.Helper.Database.getInstance;
 
 import android.annotation.SuppressLint;
@@ -73,6 +74,7 @@ public class CompostoDAO {
         values.put(Database.COLUMN_ID_1, compostoId);
         values.put(Database.COLUMN_NOME_COMPOSTO, compostoQuimico.nome);
         values.put(COLUMN_FORMULA, compostoQuimico.formula);
+        values.put(COLUMN_UNIDADE_MEDIDA, compostoQuimico.unidadeMedida);
 
         return db.update(Database.TABLE_NAME_1, values,
                 Database.COLUMN_ID_1 + " = ?",

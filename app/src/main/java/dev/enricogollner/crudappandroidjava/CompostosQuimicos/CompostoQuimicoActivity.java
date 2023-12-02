@@ -18,6 +18,7 @@ import java.util.List;
 
 import dev.enricogollner.crudappandroidjava.Helper.CompostoDAO;
 import dev.enricogollner.crudappandroidjava.R;
+import dev.enricogollner.crudappandroidjava.RegistroSaida.CadastroRegistroSaidaActivity;
 import dev.enricogollner.crudappandroidjava.models.CompostoQuimico;
 
 public class CompostoQuimicoActivity extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class CompostoQuimicoActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.btnAbreCadastro)).setOnClickListener(view -> {
             idCompostoSelecionado = null;
+            posComposto = null;
             startActivity(new Intent(this, CadastroCompostosActivity.class));
         });
     }

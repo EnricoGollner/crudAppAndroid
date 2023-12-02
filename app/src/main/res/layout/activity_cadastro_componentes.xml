@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro de Componente Químico"
+        android:text="Cadastro de Compostos Químicos"
         android:textAlignment="center"
         android:textSize="35dp" />
 
@@ -65,7 +65,7 @@
 
         <Spinner
             android:id="@+id/selectUnidadeMedida"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:entries="@array/unidades_medida"
             android:padding="15dp"/>

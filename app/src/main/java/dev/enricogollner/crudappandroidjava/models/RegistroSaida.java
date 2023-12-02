@@ -10,6 +10,22 @@ public class RegistroSaida {
         return idRegistro;
     }
 
+    public void setIdRegistro(Long idRegistro) {
+        this.idRegistro = idRegistro;
+    }
+
+    public void setCompostoQuimico(CompostoQuimico compostoQuimico) {
+        this.compostoQuimico = compostoQuimico;
+    }
+
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
     public CompostoQuimico getCompostoQuimico() {
         return compostoQuimico;
     }
@@ -31,8 +47,12 @@ public class RegistroSaida {
         this.observacoes = observacoes;
     }
 
+    public RegistroSaida() {
+
+    }
+
     @Override
     public String toString() {
-        return this.compostoQuimico.nome + " | Quantidade: " + this.quantidade + this.compostoQuimico.unidadeMedida + "\nObservações" + this.observacoes;
+        return this.compostoQuimico.nome + " | Quantidade: " + this.quantidade + this.compostoQuimico.unidadeMedida + "\nObservações: " + this.observacoes;
     }
 }
